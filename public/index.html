@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelley Castillo - Resume</title>
+    
+    <!--favicon -->
+   <link rel="icon" href="images/miffy.jpg">
+
+
+    <!--stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+   <!-- HEADER  -->
+    <div class="page">
+<header class="header">
+    <div class="header-text">
+        <h1>Kelley Castillo</h1>
+        <h5>Email: <a href="mailto:kelley@castillo.ai">kelley@castillo.ai</a></h5>
+        <h5>Phone: 253 (487) 9390</h5>
+        <h5>Address: Kent, WA</h5>
+
+        <!-- profile photo centered -->
+        <div class="profile-wrapper">
+            <img src="images/me.jpeg" alt="pic of me" class="profile-pic">
+        </div>
+
+        <div class="summary">
+            <p>I am a BAS student learning Software Development looking for opportunities with Information Technology (IT), Computer Software Engineering (CSE),
+            and Computer Engineering (CE). While finding these opportunities, 
+            I hope to enhance my communication skills and view a new mindset.</p>
+        </div>
+    </div>
+</header>
+
+    
+
+    <!-- EXPERIENCE-->
+    <section class = "section">
+        <h2>Work Experience</h2>
+        <!-- work 1 (current)-->
+        <h3>Sales Manager & Keyholder - LOFT</h3> 
+        <p><em>September 2025 - Present</em></p>
+        <p>Currently a Sales Manager that manages brand design layout for the store, selling costs and efficiency, and meet customer satisfaction.  </p>
+        <p>Which I...</p>
+        <ul>
+            <li> Provide exceptional customer service and personalized styling support to
+                clients. </li>
+            <li>Lead floor operations and manage team workflows as a keyholder.</li>
+            <li>Support store management in training, sales strategy, and daily operations.</li>
+        </ul>
+
+        <!-- work 2 (past)-->
+          <h3>Web Intern - Pivotal Consulting</h3> 
+        <p><em>June 2025 - August 2025</em></p>
+        <p>Collaboared with teachers and IT staff to design and develop an accessibility website for Kindergarten to 5th grade students. </p>
+        <p>Which I...</p>
+        <ul>
+            <li>Implemented accessibility features such as screen reader support, audio descriptions, keyboard navigation, and high-contrast visual themes.</li>
+            <li>Tested the website usability with visually impaired and hard-of-hearing students to ensure inclusivity and compliance with WCAG standards.</li>
+            <li>Learned empathy-driven design principles that emphasize accessibility, simplicity, and positive user experience.</li>
+        </ul>
+
+        <!-- work 3 (past)-->
+        <h3> Season Sales Associate - Nordstrom</h3>
+        <p><em>June 2025 - September 2025</em></p>
+        <p>Engaged with customers and try to resolve their issues in terms of buying gifts, a baby stroller, or simply returning clothes that was not satisfactory.</p>
+         <p>Which I...</p>
+         <ul>
+            <li>Delivered top-tier customer service across Kidswear and Kids Shoes departments.</li>
+            <li>Assisted with product styling, upselling, and resolving customer issues.</li>
+            <li>Provided support for Nordstrom Credit Card services and shipping inquiries.</li>
+            <li>Generated over $89,000 in sales within 3 months through proactive engagement.</li>
+
+            <p> You can see all my projects here: <a href="https://github.com/kacastillo?tab=repositories">Github</a>
+        </ul>
+    </section>
+
+
+        <!-- TECHNICAL SKILLS-->
+    <section class = "section">
+        <h2> Technical Skills</h2>
+        <ul>
+            <li>Proficient in Microsoft 365 (Word, PowerPoint, Excel, Outlook, Teams, Access, OneNote)</li>
+            <li>Strong written and verbal communication; excellent multitasking and team coordination</li>
+            <li>Intermediate programming in Java, JavaScript, HTML, SQL, CSS, C++, Python, REACT, and Power BI</li>
+        </ul>
+    </section>
+
+        <!-- EDUCATION-->
+        <section class = "section">
+             <h2>Education</h2>
+         <ul>
+             <li><strong>Green River College</strong> – B.A. in Software Development (Computer Science), 2025–2027</li>
+             <li><strong>Green River College</strong> – Associate in Arts, 2022–2024</li>
+            <li><strong>Kentwood High School</strong> – High School Diploma, 2020–2024</li>
+        </ul>
+         </section>
+
+        <!-- NODE  -->
+        <section class="section">
+            <h2 class="form-title">Contact Form</h2>
+            
+            <form class="guestbook-form" action="/guestbook" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input id="firstName" name="firstName" type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input id="lastName" name="lastName" type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title</label>
+                        <input id="jobTitle" name="jobTitle" type="text">
+                    </div>
+                </div>
+
+        
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input id="company" name="company" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="linkedin">LinkedIn URL</label>
+                        <input id="linkedin" name="linkedin" type="url">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input id="email" name="email" type="email" required>
+                    </div>
+                </div>
+
+        
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="howMet">How did we meet?</label>
+                        <select id="howMet" name="howMet" required>
+                            <option value="">Please select</option>
+                            <option value="Class">Class</option>
+                            <option value="LinkedIn">LinkedIn</option>
+                            <option value="Job">Job</option>
+                        </div>
+                        </select>
+                        <input id="howMetOther" name="howMetOther" type="text" placeholder="Please specify" style="display: none;">
+                     <div class="form-group">
+                        <label for="other">Other (Please Specify)</label>
+                        <input id="other" name="other" type="text" required>
+                    </div>
+                </div>
+
+         
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="mailingList">
+                            <span class="checkmark"></span>
+                            Please add me to your mailing list
+                        </label>
+                        <label class="format-label">
+                            <input type="radio" name="emailFormat" value="html" checked> HTML email format
+                            <input type="radio" name="emailFormat" value="text"> Text
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <script>
+       
+        document.getElementById('howMet').addEventListener('change', function() {
+            document.getElementById('howMetOther').style.display = this.value;
+        });
+    </script>
+</body>
+</html>
