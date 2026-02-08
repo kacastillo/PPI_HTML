@@ -282,3 +282,40 @@ ul {
     width: 100%;
   }
 }
+
+
+/* part 3 of assignment */
+
+
+/* Error message styling */
+.error-message {
+    display: none;
+    color: #ff0000; /*red/
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+/* Error state for input fields */
+input.error,
+select.error {
+    border-color: #d32f2f;
+    background-color: #ffebee;
+}
+
+input.error:focus,
+select.error:focus {
+    outline-color: #d32f2f;
+}
+
+/* Form group spacing */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.form-group.full-width {
+    width: 100%;
+}
+}

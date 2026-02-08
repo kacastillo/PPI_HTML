@@ -93,25 +93,27 @@
         <section class = "section">
              <h2>Education</h2>
          <ul>
-             <li><strong>Green River College</strong> – B.A. in Software Development (Computer Science), 2025–2027</li>
-             <li><strong>Green River College</strong> – Associate in Arts, 2022–2024</li>
-            <li><strong>Kentwood High School</strong> – High School Diploma, 2020–2024</li>
+             <li><strong>Green River College</strong> — B.A. in Software Development (Computer Science), 2025—2027</li>
+             <li><strong>Green River College</strong> — Associate in Arts, 2022—2024</li>
+            <li><strong>Kentwood High School</strong> — High School Diploma, 2020—2024</li>
         </ul>
          </section>
 
-        <!-- NODE  -->
+        <!-- CONTACT FORM  -->
         <section class="section">
             <h2 class="form-title">Contact Form</h2>
             
-            <form class="guestbook-form" action="/guestbook" method="POST">
+            <form id="guestbookForm" class="guestbook-form" action="/guestbook" method="POST">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="firstName">First Name</label>
-                        <input id="firstName" name="firstName" type="text" required>
+                        <input id="firstName" name="firstName" type="text">
+                        <span id="firstName-error" class="error-message">First name is required</span>
                     </div>
                     <div class="form-group">
                         <label for="lastName">Last Name</label>
-                        <input id="lastName" name="lastName" type="text" required>
+                        <input id="lastName" name="lastName" type="text">
+                        <span id="lastName-error" class="error-message">Last name is required</span>
                     </div>
                     <div class="form-group">
                         <label for="jobTitle">Job Title</label>
@@ -128,10 +130,12 @@
                     <div class="form-group">
                         <label for="linkedin">LinkedIn URL</label>
                         <input id="linkedin" name="linkedin" type="url">
+                        <span id="linkedin-error" class="error-message">LinkedIn URL must start with https://linkedin.com/in/</span>
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input id="email" name="email" type="email" required>
+                        <input id="email" name="email" type="email">
+                        <span id="email-error" class="error-message">Please enter a valid email address</span>
                     </div>
                 </div>
 
@@ -139,17 +143,21 @@
                 <div class="form-row">
                     <div class="form-group full-width">
                         <label for="howMet">How did we meet?</label>
-                        <select id="howMet" name="howMet" required>
+                        <select id="howMet" name="howMet">
                             <option value="">Please select</option>
                             <option value="Class">Class</option>
                             <option value="LinkedIn">LinkedIn</option>
                             <option value="Job">Job</option>
-                        </div>
+                            <option value="Other">Other</option>
                         </select>
-                        <input id="howMetOther" name="howMetOther" type="text" placeholder="Please specify" style="display: none;">
-                     <div class="form-group">
-                        <label for="other">Other (Please Specify)</label>
-                        <input id="other" name="other" type="text" required>
+                        <span id="howMet-error" class="error-message">Please select how we met</span>
+                    </div>
+                </div>
+
+                <div class="form-row" id="otherRow" style="display: none;">
+                    <div class="form-group full-width">
+                        <label for="howMetOther">Other (Please Specify)</label>
+                        <input id="howMetOther" name="howMetOther" type="text" placeholder="Please specify">
                     </div>
                 </div>
 
@@ -157,14 +165,14 @@
                 <div class="form-row">
                     <div class="form-group full-width">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="4" required></textarea>
+                        <textarea id="message" name="message" rows="4"></textarea>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group checkbox-group">
                         <label class="checkbox-label">
-                            <input type="checkbox" name="mailingList">
+                            <input type="checkbox" id="mailingList" name="mailingList">
                             <span class="checkmark"></span>
                             Please add me to your mailing list
                         </label>
@@ -182,11 +190,7 @@
         </section>
     </div>
 
-    <script>
-       
-        document.getElementById('howMet').addEventListener('change', function() {
-            document.getElementById('howMetOther').style.display = this.value;
-        });
-    </script>
+    // form validation
+    <script src="validation.js"></script>
 </body>
 </html>

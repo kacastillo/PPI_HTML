@@ -1,0 +1,91 @@
+document.getElementById('howMet').addEventListener('change', function() {
+    let otherRow = document.getElementById('otherRow');
+    if (this.value === 'Other') {
+        otherRow.style.display = 'flex';
+    } else {
+        otherRow.style.display = 'none';
+        document.getElementById('howMetOther').value = '';
+    }
+});
+
+// Form submission validation
+document.getElementById("guestbookForm").onsubmit = () => {
+    
+    clearErrors();
+    
+    let isValid = true;
+    
+    // Validate first name
+    let firstName = document.getElementById("firstName").value.trim();
+    if (!firstName) {
+        document.getElementById("firstName-error").style.display = "block";
+        document.getElementById("firstName").classList.add("error");
+        isValid = false;
+    }
+    
+    // Validate last name
+    let lastName = document.getElementById("lastName").value.trim();
+    if (!lastName) {
+        document.getElementById("lastName-error").style.display = "block";
+        document.getElementById("lastName").classList.add("error");
+        isValid = false;
+    }
+    
+    // Validate email
+    let email = document.getElementById("email").value.trim();
+    let mailingList = document.getElementById("mailingList").checked;
+    
+    // Email is required if mailing list is checked
+    if (mailingList && !email) {
+        document.getElementById("email-error").textContent = "Email is required when subscribing to mailing list";
+        document.getElementById("email-error").style.display = "block";
+        document.getElementById("email").classList.add("error");
+        isValid = false;
+    }
+    
+    // If email is provided, validate format using regex
+    if (email) { 
+        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            document.getElementById("email-error").textContent = "Please enter a valid email address (must contain @ and .)";
+            document.getElementById("email-error").style.display = "block";
+            document.getElementById("email").classList.add("error");
+            isValid = false;
+        }
+    }
+    
+    // Validate LinkedIn URL
+    let linkedin = document.getElementById("linkedin").value.trim();
+    if (linkedin && !linkedin.startsWith("https://linkedin.com/in/")) {
+        document.getElementById("linkedin-error").style.display = "block";
+        document.getElementById("linkedin").classList.add("error");
+        isValid = false;
+    }
+    
+    // Validate "How we met" dropdown
+    let howMet = document.getElementById("howMet").value;
+    if (howMet === "") {
+        document.getElementById("howMet-error").style.display = "block";
+        document.getElementById("howMet").classList.add("error");
+        isValid = false;
+    }
+    
+    if (!isValid) {
+        let firstError = document.querySelector('.error');
+    }
+    
+    return isValid;
+}
+
+/* Clear all error messages when submitted */
+function clearErrors() {
+    let errors = document.getElementsByClassName("error-message");
+    for (let i = 0; i < errors.length; i++) {
+        errors[i].style.display = "none";
+    }
+    
+    let inputs = document.querySelectorAll(".error");
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].classList.remove("error");
+    }
+}
