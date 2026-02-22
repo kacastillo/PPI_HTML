@@ -1,91 +1,83 @@
-document.getElementById('howMet').addEventListener('change', function() {
-    let otherRow = document.getElementById('otherRow');
-    if (this.value === 'Other') {
-        otherRow.style.display = 'flex';
-    } else {
-        otherRow.style.display = 'none';
-        document.getElementById('howMetOther').value = '';
-    }
-});
+document.addEventListener('DOMContentLoaded', function () {
 
-// Form submission validation
-document.getElementById("guestbookForm").onsubmit = () => {
-    
-    clearErrors();
-    
-    let isValid = true;
-    
-    // Validate first name
-    let firstName = document.getElementById("firstName").value.trim();
-    if (!firstName) {
-        document.getElementById("firstName-error").style.display = "block";
-        document.getElementById("firstName").classList.add("error");
-        isValid = false;
-    }
-    
-    // Validate last name
-    let lastName = document.getElementById("lastName").value.trim();
-    if (!lastName) {
-        document.getElementById("lastName-error").style.display = "block";
-        document.getElementById("lastName").classList.add("error");
-        isValid = false;
-    }
-    
-    // Validate email
-    let email = document.getElementById("email").value.trim();
-    let mailingList = document.getElementById("mailingList").checked;
-    
-    // Email is required if mailing list is checked
-    if (mailingList && !email) {
-        document.getElementById("email-error").textContent = "Email is required when subscribing to mailing list";
-        document.getElementById("email-error").style.display = "block";
-        document.getElementById("email").classList.add("error");
-        isValid = false;
-    }
-    
-    // If email is provided, validate format using regex
-    if (email) { 
-        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            document.getElementById("email-error").textContent = "Please enter a valid email address (must contain @ and .)";
-            document.getElementById("email-error").style.display = "block";
-            document.getElementById("email").classList.add("error");
+    document.getElementById('howMet').addEventListener('change', function () {
+        const otherRow = document.getElementById('otherRow');
+        if (this.value === 'Other') {
+            otherRow.style.display = 'flex';
+        } else {
+            otherRow.style.display = 'none';
+            document.getElementById('howMetOther').value = '';
+        }
+    });
+
+    document.getElementById('guestbookForm').addEventListener('submit', function (e) {
+        clearErrors();
+
+        let isValid = true;
+
+        // Validate first name
+        const firstName = document.getElementById('firstName').value.trim();
+        if (!firstName) {
+            showError('firstName', 'firstName-error', 'First name is required');
             isValid = false;
         }
-    }
-    
-    // Validate LinkedIn URL
-    let linkedin = document.getElementById("linkedin").value.trim();
-    if (linkedin && !linkedin.startsWith("https://linkedin.com/in/")) {
-        document.getElementById("linkedin-error").style.display = "block";
-        document.getElementById("linkedin").classList.add("error");
-        isValid = false;
-    }
-    
-    // Validate "How we met" dropdown
-    let howMet = document.getElementById("howMet").value;
-    if (howMet === "") {
-        document.getElementById("howMet-error").style.display = "block";
-        document.getElementById("howMet").classList.add("error");
-        isValid = false;
-    }
-    
-    if (!isValid) {
-        let firstError = document.querySelector('.error');
-    }
-    
-    return isValid;
-}
 
-/* Clear all error messages when submitted */
-function clearErrors() {
-    let errors = document.getElementsByClassName("error-message");
-    for (let i = 0; i < errors.length; i++) {
-        errors[i].style.display = "none";
+        // Validate last name
+        const lastName = document.getElementById('lastName').value.trim();
+        if (!lastName) {
+            showError('lastName', 'lastName-error', 'Last name is required');
+            isValid = false;
+        }
+
+        // Validate email
+        const email = document.getElementById('email').value.trim();
+        const mailingList = document.getElementById('mailingList').checked;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (mailingList && !email) {
+            showError('email', 'email-error', 'Email is required when subscribing to mailing list');
+            isValid = false;
+        } else if (email && !emailRegex.test(email)) {
+            showError('email', 'email-error', 'Please enter a valid email address (must contain @ and .)');
+            isValid = false;
+        }
+
+        // Validate LinkedIn URL
+        const linkedin = document.getElementById('linkedin').value.trim();
+        if (linkedin && !linkedin.startsWith('https://linkedin.com/in/')) {
+            showError('linkedin', 'linkedin-error', 'LinkedIn URL must start with https://linkedin.com/in/');
+            isValid = false;
+        }
+
+        // Validate "How we met" dropdown
+        const howMet = document.getElementById('howMet').value;
+        if (howMet === '') {
+            showError('howMet', 'howMet-error', 'Please select how we met');
+            isValid = false;
+        }
+
+        if (!isValid) {
+            e.preventDefault();
+            // Scroll to first error so the user sees it
+            const firstError = document.querySelector('.error');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstError.focus();
+            }
+        }
+    });
+
+    function showError(inputId, errorId, message) {
+        const input = document.getElementById(inputId);
+        const error = document.getElementById(errorId);
+        error.textContent = message;
+        error.style.display = 'block';
+        input.classList.add('error');
     }
-    
-    let inputs = document.querySelectorAll(".error");
-    for (let i = 0; i < inputs.length; i++) {
-        inputs[i].classList.remove("error");
+
+    function clearErrors() {
+        document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
     }
-}
+
+});
