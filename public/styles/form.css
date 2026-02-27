@@ -1,0 +1,126 @@
+.error-message {
+    display: none;
+    color: red;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+/* Error state for input fields */
+input.error,
+select.error {
+    border-color: red;
+    background-color: #ffebee;
+}
+
+input.error:focus,
+select.error:focus {
+    outline-color: red;
+}
+
+/* Form group spacing */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.form-group.full-width {
+    width: 100%;
+}
+
+.guestbook-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.form-row label {
+    flex: 0 0 120px;
+    font-weight: 600;
+}
+
+.form-row input,
+.form-row textarea {
+    flex: 1 1 auto;
+    padding: 0.4rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font: inherit;
+}
+
+.form-row-full {
+    align-items: flex-start;
+}
+
+.form-row-full label {
+    margin-top: 0.2rem;
+}
+
+/* Part 4 of assignment*/
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+}
+
+.form-actions button {
+    padding: 0.55rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.form-actions button:hover,
+.form-actions button:focus {
+    background: var(--accent);
+}
+
+.form-group select {
+    padding: 0.4rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font: inherit;
+    background: #fff;
+}
+
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.checkbox-label, .format-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-row label {
+        flex: none;
+        width: 100%;
+    }
+}

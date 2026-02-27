@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You – Kelley Castillo</title>
+  <link rel="icon" href="images/miffy.jpg">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .confirmation-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--bg);
+    }
+    .confirmation-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 3rem 2.5rem;
+      max-width: 560px;
+      width: 90%;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    .confirmation-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+    .confirmation-card h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .confirmation-card p {
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .confirmation-details {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      text-align: left;
+    }
+    .confirmation-details p {
+      margin: 0.3rem 0;
+      font-size: 0.9rem;
+    }
+    .confirmation-details strong {
+      color: var(--primary);
+    }
+    .btn-back {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.65rem 1.75rem;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+    .btn-back:hover {
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="confirmation-page">
+    <div class="confirmation-card">
+      <div class="confirmation-icon"></div>
+      <h1>Thanks, <%= entry.firstName || 'Friend' %>!</h1>
+      <p>Your message has been received. I'll be in touch soon.</p>
+
+      <div class="confirmation-details">
+        <p><strong>Name:</strong> <%= entry.fullName %></p>
+
+        <% if (entry.jobTitle) { %>
+          <p><strong>Title:</strong> <%= entry.jobTitle %></p>
+        <% } %>
+
+        <% if (entry.company) { %>
+          <p><strong>Company:</strong> <%= entry.company %></p>
+        <% } %>
+
+        <p><strong>Email:</strong> <%= entry.email %></p>
+
+        <% if (entry.howMet) { %>
+          <p><strong>How we met:</strong> <%= entry.howMet %></p>
+        <% } %>
+
+        <% if (entry.mailingList) { %>
+          <p><strong>Mailing list:</strong> Added (<%= entry.emailFormat.toUpperCase() %> format)</p>
+        <% } %>
+
+        <% if (entry.message) { %>
+          <p><strong>Message:</strong> "<%= entry.message %>"</p>
+        <% } %>
+
+        <p style="margin-top:0.75rem; color:#aaa; font-size:0.8rem;">
+          Submitted at <%= entry.submittedAt %> PT
+        </p>
+      </div>
+
+      <a href="/" class="btn-back">← Back to Home</a>
+    </div>
+  </div>
+
+  <script src="/confirmation.js"></script>
+</body>
+</html>
