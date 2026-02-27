@@ -9,7 +9,6 @@ const contacts = [];
 // Set EJS 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -24,7 +23,7 @@ app.get('/contact', (req, res) => {
   res.render('contact');
 });
 
-//  form submission
+// Handle form submission
 app.post('/guestbook', (req, res) => {
   const {
     firstName,
@@ -40,7 +39,7 @@ app.post('/guestbook', (req, res) => {
     emailFormat
   } = req.body;
 
-  // contacts array
+  //  contacts array
   const entry = {
     id: contacts.length + 1,
     submittedAt: new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }),
@@ -65,7 +64,7 @@ app.post('/guestbook', (req, res) => {
   res.render('confirmation', { entry });
 });
 
-// Admin route - display all submissions
+// display all submissions
 app.get('/admin', (req, res) => {
   res.render('admin', { contacts });
 });
