@@ -1,12 +1,60 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    document.getElementById('howMet').addEventListener('change', function () {
-        const otherRow = document.getElementById('otherRow');
+     document.getElementById('howMet').addEventListener('change', function () {
+        let otherRow = document.getElementById('otherRow');
         if (this.value === 'Other') {
             otherRow.style.display = 'flex';
         } else {
             otherRow.style.display = 'none';
             document.getElementById('howMetOther').value = '';
+        }
+    });
+
+    // Validate when user leaves a field
+    document.getElementById('firstName').addEventListener('blur', function () {
+        if (!this.value.trim()) {
+            showError('firstName', 'firstName-error', 'First name is required');
+        } else {
+            clearFieldError('firstName', 'firstName-error');
+        }
+    });
+
+    document.getElementById('lastName').addEventListener('blur', function () {
+        if (!this.value.trim()) {
+            showError('lastName', 'lastName-error', 'Last name is required');
+        } else {
+            clearFieldError('lastName', 'lastName-error');
+        }
+    });
+
+    document.getElementById('email').addEventListener('blur', function () {
+        const email = this.value.trim();
+        const mailingList = document.getElementById('mailingList').checked;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (mailingList && !email) {
+            showError('email', 'email-error', 'Email is required when subscribing to mailing list');
+        } else if (email && !emailRegex.test(email)) {
+            showError('email', 'email-error', 'Please enter a valid email address (must contain @ and .)');
+        } else {
+            clearFieldError('email', 'email-error');
+        }
+    });
+
+    document.getElementById('linkedin').addEventListener('blur', function () {
+        const linkedin = this.value.trim();
+        if (linkedin && !linkedin.startsWith('https://linkedin.com/in/')) {
+            showError('linkedin', 'linkedin-error', 'LinkedIn URL must start with https://linkedin.com/in/');
+        } else {
+            clearFieldError('linkedin', 'linkedin-error');
+        }
+    });
+
+    document.getElementById('howMet').addEventListener('blur', function () {
+        if (this.value === '') {
+            showError('howMet', 'howMet-error', 'Please select how we met');
+        } else {
+            clearFieldError('howMet', 'howMet-error');
         }
     });
 
@@ -71,11 +119,21 @@ document.addEventListener('DOMContentLoaded', function () {
         const input = document.getElementById(inputId);
         const error = document.getElementById(errorId);
         error.textContent = message;
+        // Reveal the error message
         error.style.display = 'block';
         input.classList.add('error');
     }
 
+    // Clears error on a single field 
+    function clearFieldError(inputId, errorId) {
+        const input = document.getElementById(inputId);
+        const error = document.getElementById(errorId);
+        error.style.display = 'none';
+        input.classList.remove('error');
+    }
+
     function clearErrors() {
+        // Hide all error messages 
         document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
         document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
     }
