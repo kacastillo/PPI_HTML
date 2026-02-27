@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin – Contact Submissions</title>
+    <link rel="icon" href="images/miffy.jpg">
+
+    <!-- Scripts -->
+    <script src="//code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="//cdn.datatables.net/2.3.7/js/dataTables.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="//cdn.datatables.net/2.3.7/css/dataTables.dataTables.css">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+    <h1>Contact Submissions</h1>
+
+    <% if (contacts.length === 0) { %>
+        <p>📭 No submissions yet. Submissions will appear here after someone fills out the contact form.</p>
+        <a href="/contact">Go to Contact Form →</a>
+
+    <% } else { %>
+        <!-- Submissions table -->
+        <table id="contacts-table" class="display">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Submitted</th>
+                    <th>Name</th>
+                    <th>Title / Company</th>
+                    <th>Email</th>
+                    <th>LinkedIn</th>
+                    <th>How We Met</th>
+                    <th>Mailing List</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% contacts.forEach(function(c) { %>
+                    <tr>
+                        <td><%= c.id %></td>
+                        <td><%= c.submittedAt %></td>
+                        <td><%= c.fullName || '—' %></td>
+                        <td><%= [c.jobTitle, c.company].filter(Boolean).join(' @ ') || '—' %></td>
+                        <td><%= c.email || '—' %></td>
+                        <td><%= c.linkedin || '—' %></td>
+                        <td><%= c.howMet || '—' %></td>
+                        <td><%= c.mailingList ? 'Yes (' + c.emailFormat.toUpperCase() + ')' : 'No' %></td>
+                        <td><%= c.message || '—' %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+    <% } %>
+
+    <script defer>
+        let table = new DataTable('#contacts-table');
+    </script>
+
+</body>
+</html>
