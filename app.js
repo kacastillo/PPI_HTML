@@ -1,69 +1,76 @@
-let express = require('express');
-let path = require('path');
+const express = require('express');
+const path = require('path');
 
-let app = express();
-let PORT = 3000;
+const app = express();
+const PORT = 3000;
 
-let contacts = [];
+const contacts = [];
 
 // Set EJS 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public'));
 
+// Home page
 app.get('/', (req, res) => {
-    res.render('index');
+  res.render('index');
 });
 
+// Contact form page
 app.get('/contact', (req, res) => {
-    res.render('contact');
+  res.render('contact');
 });
 
-app.get('/guestbook', (req, res) => {
-    res.redirect('/');
-});
-
+//  form submission
 app.post('/guestbook', (req, res) => {
-    const {
-        firstName, lastName, jobTitle,
-        company, linkedin, email,
-        howMet, howMetOther, message,
-        mailingList, emailFormat
-    } = req.body;
+  const {
+    firstName,
+    lastName,
+    jobTitle,
+    company,
+    linkedin,
+    email,
+    howMet,
+    howMetOther,
+    message,
+    mailingList,
+    emailFormat
+  } = req.body;
 
+  // contacts array
+  const entry = {
+    id: contacts.length + 1,
+    submittedAt: new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }),
+    firstName: firstName || '',
+    lastName: lastName || '',
+    fullName: `${firstName || ''} ${lastName || ''}`.trim(),
+    jobTitle: jobTitle || '',
+    company: company || '',
+    linkedin: linkedin || '',
+    email: email || '',
+    howMet: howMet === 'Other' ? (howMetOther || 'Other') : (howMet || ''),
+    message: message || '',
+    mailingList: mailingList === 'on',
+    emailFormat: emailFormat || 'html'
+  };
 
-    //* had to google how to do an array >> https://www.w3schools.com/js/js_arrays.asp */
-    let entry = {
-        id:          contacts.length + 1,
-        submittedAt: new Date().toLocaleString(),
-        firstName:   firstName  || '',
-        lastName:    lastName   || '',
-        fullName:    `${firstName || ''} ${lastName || ''}`.trim(),
-        jobTitle:    jobTitle   || '',
-        company:     company    || '',
-        linkedin:    linkedin   || '',
-        email:       email      || '',
-        howMet:      howMet === 'Other' ? (howMetOther || 'Other') : (howMet || ''),
-        message:     message    || '',
-        mailingList: mailingList === 'on',
-        emailFormat: emailFormat || 'html'
-    };
+  contacts.push(entry);
 
-    contacts.push(entry);
-    console.log(`Entry #${entry.id} saved: ${entry.firstName} ${entry.lastName}`);
+  console.log(`[${entry.submittedAt}] New contact: ${entry.fullName} (${entry.email})`);
 
-    res.render('confirmation', { entry });
+  // Send confirmation page
+  res.render('confirmation', { entry });
 });
 
+// Admin route - display all submissions
 app.get('/admin', (req, res) => {
-    res.render('admin', { contacts });
+  res.render('admin', { contacts });
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running → http://localhost:${PORT}`);
-    console.log(`Admin:          http://localhost:${PORT}/admin`); //confirmation page url
+  console.log(`Confirmation running at http://localhost:${PORT}`);
+  console.log(`Admin panel at http://localhost:${PORT}/admin`);
 });
