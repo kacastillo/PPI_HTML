@@ -1,8 +1,11 @@
 import express from 'express';
-import mysql from 'mysql2';
+import mysql from 'mysql2/promise'; 
 import dotenv from 'dotenv';
 
+import path from 'path';            
+
 dotenv.config();
+
 
 const app = express();
 const PORT = 3000;
@@ -13,26 +16,24 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
+const db = mysql.createPool({
+  host:     process.env.DB_HOST,
+  user:     process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-}).pool.promise();
-
+});
 
 // Home / resume page
 app.get('/', (req, res) => {
   res.render('index');
 });
 
-// Contact form page (if you have a standalone /contact route)
+// Contact form page
 app.get('/contact', (req, res) => {
   res.render('contact');
 });
 
-// POST /guestbook — save submission to MySQL with a prepared statement
+
 app.post('/guestbook', async (req, res) => {
   const {
     firstName,
@@ -48,7 +49,6 @@ app.post('/guestbook', async (req, res) => {
     emailFormat
   } = req.body;
 
-  // Build the entry object (same shape as before)
   const entry = {
     submittedAt: new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }),
     firstName:   firstName  || '',
@@ -65,7 +65,6 @@ app.post('/guestbook', async (req, res) => {
   };
 
   try {
-    // Prepared statement — ? placeholders prevent SQL injection
     const sql = `
       INSERT INTO contacts
         (first_name, last_name, job_title, company, linkedin,
@@ -87,7 +86,6 @@ app.post('/guestbook', async (req, res) => {
       entry.submittedAt
     ]);
 
-    // Attach the new auto-increment id so the confirmation page can show it
     entry.id = result.insertId;
 
     console.log(`[${entry.submittedAt}] New contact saved (id=${entry.id}): ${entry.fullName} (${entry.email})`);
@@ -107,7 +105,6 @@ app.get('/admin', async (req, res) => {
       'SELECT * FROM contacts ORDER BY id DESC'
     );
 
-    // Map DB column names back to the shape admin.ejs already expects
     const contacts = rows.map(r => ({
       id:          r.id,
       submittedAt: r.submitted_at,
@@ -132,7 +129,6 @@ app.get('/admin', async (req, res) => {
   }
 });
 
-// ─── Start ─────────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
   console.log(`Admin panel at http://localhost:${PORT}/admin`);
