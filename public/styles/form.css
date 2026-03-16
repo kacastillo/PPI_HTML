@@ -1,126 +1,174 @@
-.error-message {
-    display: none;
-    color: red;
-    font-size: 0.85rem;
-    margin-top: 0.25rem;
-    font-weight: 500;
+.required {
+  color: #c0392b;
+  margin-left: 0.1rem;
 }
 
-/* Error state for input fields */
+/* Server validation error banner */
+.server-errors {
+  background: #fff0f0;
+  border: 1px solid #f5c6c6;
+  border-left: 4px solid #c0392b;
+  border-radius: 6px;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1.25rem;
+  color: #7b1e1e;
+  font-size: 0.93rem;
+}
+
+.server-errors strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.97rem;
+}
+
+.server-errors ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.server-errors li {
+  margin-bottom: 0.25rem;
+}
+
+/* Client-side inline error messages */
+.error-message {
+  display: none;
+  color: #c0392b;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* Error state for input/select fields */
 input.error,
 select.error {
-    border-color: red;
-    background-color: #ffebee;
+  border-color: #c0392b;
+  background-color: #ffebee;
 }
 
 input.error:focus,
 select.error:focus {
-    outline-color: red;
+  outline-color: #c0392b;
 }
 
-/* Form group spacing */
+/* Form group */
 .form-group {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .form-group.full-width {
-    width: 100%;
+  width: 100%;
 }
 
+/* Guestbook form layout */
 .guestbook-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    max-width: 600px;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .form-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .form-row label {
-    flex: 0 0 120px;
-    font-weight: 600;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
 }
 
 .form-row input,
 .form-row textarea {
-    flex: 1 1 auto;
-    padding: 0.4rem 0.5rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font: inherit;
+  padding: 0.4rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font: inherit;
+  width: 100%;
 }
 
-.form-row-full {
-    align-items: flex-start;
+.form-group select {
+  padding: 0.4rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font: inherit;
+  background: #fff;
+  width: 100%;
 }
 
-.form-row-full label {
-    margin-top: 0.2rem;
-}
-
-/* Part 4 of assignment*/
-
+/* Submit button row */
 .form-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
 }
 
 .form-actions button {
-    padding: 0.55rem 1.5rem;
-    border: none;
-    border-radius: 6px;
-    background: var(--primary);
-    color: white;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
+  padding: 0.55rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .form-actions button:hover,
 .form-actions button:focus {
-    background: var(--accent);
+  background: var(--accent);
 }
 
-.form-group select {
-    padding: 0.4rem 0.5rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font: inherit;
-    background: #fff;
-}
-
+/* Checkbox / radio row */
 .checkbox-group {
-    flex-direction: row;
-    align-items: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
-.checkbox-label, .format-label {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    cursor: pointer;
-    font-size: 0.95rem;
+.checkbox-label,
+.format-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: normal;
+}
+
+/* Radio fieldset */
+.radio-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.radio-legend {
+  font-weight: 600;
+  font-size: 0.92rem;
+  float: left;
+  margin-right: 0.75rem;
+  color: var(--text-muted);
 }
 
 @media (max-width: 600px) {
-    .form-row {
-        flex-direction: column;
-        align-items: stretch;
-    }
+  .form-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-    .form-row label {
-        flex: none;
-        width: 100%;
-    }
+  .checkbox-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
 }
