@@ -2,9 +2,13 @@ import express from 'express';
 import mysql from 'mysql2/promise'; 
 import dotenv from 'dotenv';
 
-import path from 'path';            
+import path from 'path';
+import { fileURLToPath } from 'url';            
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 const app = express();
@@ -21,16 +25,25 @@ const db = mysql.createPool({
   user:     process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  port:     process.env.DB_PORT || 3306,
 });
+
+// Valid options for "how we met" — used in server-side validation
+const VALID_HOW_MET = ['Class', 'LinkedIn', 'Job', 'Other'];
 
 // Home / resume page
 app.get('/', (req, res) => {
   res.render('index');
 });
 
+// Portfolio page
+app.get('/portfolio', (req, res) => {
+  res.render('portfolio');
+});
+
 // Contact form page
 app.get('/contact', (req, res) => {
-  res.render('contact');
+  res.render('contact', { errors: [], old: {} });
 });
 
 
@@ -48,6 +61,35 @@ app.post('/guestbook', async (req, res) => {
     mailingList,
     emailFormat
   } = req.body;
+
+  // Server-side validation
+  const errors = [];
+
+  if (!firstName || !firstName.trim())
+    errors.push('First name is required.');
+
+  if (!lastName || !lastName.trim())
+    errors.push('Last name is required.');
+
+  if (!howMet || !VALID_HOW_MET.includes(howMet))
+    errors.push('Please select a valid "How did we meet?" option.');
+
+  if (mailingList === 'on') {
+    if (!emailFormat || !['html', 'text'].includes(emailFormat))
+      errors.push('Please select an email format (HTML or Text) for the mailing list.');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !email.trim())
+      errors.push('An email address is required to join the mailing list.');
+    else if (!emailRegex.test(email.trim()))
+      errors.push('Please enter a valid email address.');
+  }
+
+  if (linkedin && linkedin.trim() && !linkedin.trim().startsWith('https://linkedin.com/in/'))
+    errors.push('LinkedIn URL must start with https://linkedin.com/in/');
+
+  if (errors.length > 0) {
+    return res.status(422).render('contact', { errors, old: req.body });
+  }
 
   const entry = {
     submittedAt: new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }),
