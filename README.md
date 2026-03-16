@@ -4,7 +4,7 @@ A full-stack personal resume, portfolio, and guestbook application built with No
 
 ## Deployed URL
 
-> 
+> http://165.232.148.216:3000
 
 ## Project Description
 
