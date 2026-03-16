@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelley Castillo – Resume</title>
+  <link rel="icon" href="/images/miffy.jpg">
+  <link rel="stylesheet" href="/styles/styles.css">
+  <link rel="stylesheet" href="/styles/nav.css">
+  <link rel="stylesheet" href="/styles/form.css">
+</head>
+<body>
+
+  <%- include('nav') %>
+
+  <main class="page">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-text">
+        <h1>Kelley Castillo</h1>
+        <p class="contact">Email: <a href="mailto:kelley@castillo.ai">kelley@castillo.ai</a></p>
+        <p class="contact">Phone: <a href="tel:2534879390">253-487-9390</a></p>
+        <p class="contact">Location: Kent, WA</p>
+
+        <div class="profile-wrapper">
+          <img src="/images/me.jpeg" alt="Photo of Kelley Castillo" class="profile-pic">
+        </div>
+
+        <div class="summary">
+          <p>I am a BAS student learning Software Development looking for opportunities with Information Technology (IT), Computer Software Engineering (CSE), and Computer Engineering (CE). While finding these opportunities, I hope to enhance my communication skills and view a new mindset.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- EXPERIENCE -->
+    <section class="section">
+      <h2>Work Experience</h2>
+
+      <div class="job">
+        <h3>Sales Manager &amp; Keyholder – LOFT</h3>
+        <p class="job-dates"><em>September 2025 – Present</em></p>
+        <p>Currently a Sales Manager that manages brand design layout for the store, selling costs and efficiency, and meets customer satisfaction.</p>
+        <ul>
+          <li>Provide exceptional customer service and personalized styling support to clients.</li>
+          <li>Lead floor operations and manage team workflows as a keyholder.</li>
+          <li>Support store management in training, sales strategy, and daily operations.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <h3>Web Intern – Pivotal Consulting</h3>
+        <p class="job-dates"><em>June 2025 – August 2025</em></p>
+        <p>Collaborated with teachers and IT staff to design and develop an accessibility website for Kindergarten to 5th grade students.</p>
+        <ul>
+          <li>Implemented accessibility features such as screen reader support, audio descriptions, keyboard navigation, and high-contrast visual themes.</li>
+          <li>Tested website usability with visually impaired and hard-of-hearing students to ensure inclusivity and compliance with WCAG standards.</li>
+          <li>Learned empathy-driven design principles that emphasize accessibility, simplicity, and positive user experience.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <h3>Seasonal Sales Associate – Nordstrom</h3>
+        <p class="job-dates"><em>June 2025 – September 2025</em></p>
+        <p>Engaged with customers to resolve issues involving gift purchases, baby strollers, and returns.</p>
+        <ul>
+          <li>Delivered top-tier customer service across Kidswear and Kids Shoes departments.</li>
+          <li>Assisted with product styling, upselling, and resolving customer issues.</li>
+          <li>Provided support for Nordstrom Credit Card services and shipping inquiries.</li>
+          <li>Generated over $89,000 in sales within 3 months through proactive engagement.</li>
+        </ul>
+      </div>
+
+      <p>View all my projects: <a href="https://github.com/kacastillo?tab=repositories" target="_blank" rel="noopener">GitHub</a></p>
+    </section>
+
+    <!-- TECHNICAL SKILLS -->
+    <section class="section">
+      <h2>Technical Skills</h2>
+      <ul>
+        <li>Proficient in Microsoft 365 (Word, PowerPoint, Excel, Outlook, Teams, Access, OneNote)</li>
+        <li>Strong written and verbal communication; excellent multitasking and team coordination</li>
+        <li>Intermediate programming in Java, JavaScript, HTML, SQL, CSS, C++, Python, React, and Power BI</li>
+      </ul>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="section">
+      <h2>Education</h2>
+      <ul>
+        <li><strong>Green River College</strong> — B.A. in Software Development (Computer Science), 2025–2027</li>
+        <li><strong>Green River College</strong> — Associate in Arts, 2022–2024</li>
+        <li><strong>Kentwood High School</strong> — High School Diploma, 2020–2024</li>
+      </ul>
+    </section>
+
+    <!-- CONTACT FORM (links to /contact page) -->
+    <section class="section">
+      <h2 class="form-title">Get in Touch</h2>
+      <p>Have a question or want to connect? <a href="/contact">Fill out my contact form →</a></p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <a href="https://github.com/kacastillo?tab=repositories" target="_blank" rel="noopener">GitHub Repositories</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.linkedin.com/in/kelley-castillo-486b31234/" target="_blank" rel="noopener">LinkedIn Profile</a>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    if (toggle && navLinks) {
+      toggle.addEventListener('click', function () {
+        const open = navLinks.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+    document.querySelectorAll('.nav-link').forEach(link => {
+      if (link.getAttribute('href') === window.location.pathname) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>

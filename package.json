@@ -2,27 +2,17 @@
   "name": "ppi_html",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kacastillo/PPI_HTML.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/kacastillo/PPI_HTML/issues"
-  },
-  "homepage": "https://github.com/kacastillo/PPI_HTML#readme",
   "dependencies": {
+    "dotenv": "^17.3.1",
     "ejs": "^4.0.1",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "mysql2": "^3.6.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"

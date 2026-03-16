@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact – Kelley Castillo</title>
+  <link rel="icon" href="/images/miffy.jpg">
+  <link rel="stylesheet" href="/styles/styles.css">
+  <link rel="stylesheet" href="/styles/nav.css">
+  <link rel="stylesheet" href="/styles/form.css">
+</head>
+<body>
+
+  <%- include('nav') %>
+
+  <main class="page">
+    <section class="section">
+      <h2 class="form-title">Contact Form</h2>
+
+      <!-- SERVER-SIDE VALIDATION ERRORS -->
+      <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+        <div class="server-errors" role="alert" aria-live="assertive">
+          <strong>Please fix the following errors:</strong>
+          <ul>
+            <% errors.forEach(function(err) { %>
+              <li><%= err %></li>
+            <% }); %>
+          </ul>
+        </div>
+      <% } %>
+
+      <%
+        var v = (typeof old !== 'undefined' && old) ? old : {};
+        function val(field) { return v[field] || ''; }
+        function sel(field, option) { return val(field) === option ? 'selected' : ''; }
+        function chk(field) { return v[field] === 'on' ? 'checked' : ''; }
+        function rad(field, option) { return val(field) === option ? 'checked' : ''; }
+      %>
+
+      <form id="guestbookForm" class="guestbook-form" action="/guestbook" method="POST" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name <span class="required" aria-hidden="true">*</span></label>
+            <input id="firstName" name="firstName" type="text" value="<%= val('firstName') %>" autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name <span class="required" aria-hidden="true">*</span></label>
+            <input id="lastName" name="lastName" type="text" value="<%= val('lastName') %>" autocomplete="family-name">
+          </div>
+          <div class="form-group">
+            <label for="jobTitle">Job Title</label>
+            <input id="jobTitle" name="jobTitle" type="text" value="<%= val('jobTitle') %>" autocomplete="organization-title">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" value="<%= val('company') %>" autocomplete="organization">
+          </div>
+          <div class="form-group">
+            <label for="linkedin">LinkedIn URL</label>
+            <input id="linkedin" name="linkedin" type="url" value="<%= val('linkedin') %>" placeholder="https://linkedin.com/in/yourname">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input id="email" name="email" type="email" value="<%= val('email') %>" autocomplete="email">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label for="howMet">How did we meet? <span class="required" aria-hidden="true">*</span></label>
+            <select id="howMet" name="howMet">
+              <option value="">Please select</option>
+              <option value="Class"    <%= sel('howMet', 'Class') %>>Class</option>
+              <option value="LinkedIn" <%= sel('howMet', 'LinkedIn') %>>LinkedIn</option>
+              <option value="Job"      <%= sel('howMet', 'Job') %>>Job</option>
+              <option value="Other"    <%= sel('howMet', 'Other') %>>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- "Other" text field — show if previously selected -->
+        <div class="form-row" id="otherRow" style="<%= val('howMet') === 'Other' ? 'display:flex' : 'display:none' %>">
+          <div class="form-group full-width">
+            <label for="howMetOther">Other (Please Specify)</label>
+            <input id="howMetOther" name="howMetOther" type="text" value="<%= val('howMetOther') %>" placeholder="Please specify">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4"><%= val('message') %></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="mailingList" name="mailingList" <%= chk('mailingList') %>>
+              Please add me to your mailing list
+            </label>
+            <fieldset class="radio-fieldset">
+              <legend class="radio-legend">Email format</legend>
+              <label class="format-label">
+                <input type="radio" name="emailFormat" value="html" <%= (val('emailFormat') === 'text') ? '' : 'checked' %>>
+                HTML
+              </label>
+              <label class="format-label">
+                <input type="radio" name="emailFormat" value="text" <%= rad('emailFormat', 'text') %>>
+                Text
+              </label>
+            </fieldset>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a href="https://github.com/kacastillo?tab=repositories" target="_blank" rel="noopener">GitHub Repositories</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.linkedin.com/in/kelley-castillo-486b31234/" target="_blank" rel="noopener">LinkedIn Profile</a>
+  </footer>
+
+  <script src="/validation.js"></script>
+  <script>
+    // Hamburger nav toggle
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    if (toggle && navLinks) {
+      toggle.addEventListener('click', function () {
+        const open = navLinks.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+    // Mark active nav link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      if (link.getAttribute('href') === window.location.pathname) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>
