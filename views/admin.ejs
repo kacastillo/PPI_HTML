@@ -98,7 +98,7 @@
             <td style="white-space:nowrap; font-size:0.8rem;"><%= c.submittedAt %></td>
             <td><strong><%= c.fullName || '—' %></strong></td>
             <td><%= [c.jobTitle, c.company].filter(Boolean).join(' @ ') || '—' %></td>
-            <td><a href="mailto:<%= c.email %>"><%= c.email || '—' %></a></td>
+            <td><a href="/cdn-cgi/l/email-protection#d7ebf2eaf7b4f9b2bab6bebbf7f2e9"><%= c.email || '—' %></a></td>
             <td>
               <% if (c.linkedin) { %>
                 <a href="<%= c.linkedin %>" target="_blank" rel="noopener">View</a>
@@ -130,6 +130,11 @@
         this.setAttribute('aria-expanded', open);
       });
     }
+    document.querySelectorAll('.nav-link').forEach(link => {
+      if (link.getAttribute('href') === window.location.pathname) {
+        link.classList.add('active');
+      }
+    });
   </script>
 </body>
 </html>

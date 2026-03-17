@@ -43,10 +43,12 @@
           <div class="form-group">
             <label for="firstName">First Name <span class="required" aria-hidden="true">*</span></label>
             <input id="firstName" name="firstName" type="text" value="<%= val('firstName') %>" autocomplete="given-name">
+            <span id="firstName-error" class="error-message" style="display:none;" role="alert"></span>
           </div>
           <div class="form-group">
             <label for="lastName">Last Name <span class="required" aria-hidden="true">*</span></label>
             <input id="lastName" name="lastName" type="text" value="<%= val('lastName') %>" autocomplete="family-name">
+            <span id="lastName-error" class="error-message" style="display:none;" role="alert"></span>
           </div>
           <div class="form-group">
             <label for="jobTitle">Job Title</label>
@@ -62,10 +64,12 @@
           <div class="form-group">
             <label for="linkedin">LinkedIn URL</label>
             <input id="linkedin" name="linkedin" type="url" value="<%= val('linkedin') %>" placeholder="https://linkedin.com/in/yourname">
+            <span id="linkedin-error" class="error-message" style="display:none;" role="alert"></span>
           </div>
           <div class="form-group">
-            <label for="email">Email Address</label>
+            <label for="email">Email Address <span class="required" aria-hidden="true">*</span></label>
             <input id="email" name="email" type="email" value="<%= val('email') %>" autocomplete="email">
+            <span id="email-error" class="error-message" style="display:none;" role="alert"></span>
           </div>
         </div>
 
@@ -79,6 +83,7 @@
               <option value="Job"      <%= sel('howMet', 'Job') %>>Job</option>
               <option value="Other"    <%= sel('howMet', 'Other') %>>Other</option>
             </select>
+            <span id="howMet-error" class="error-message" style="display:none;" role="alert"></span>
           </div>
         </div>
 
